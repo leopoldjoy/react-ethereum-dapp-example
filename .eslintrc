@@ -1,0 +1,61 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "comma-dangle": ["error", "only-multiline"],
+    "consistent-return": "off",
+    "global-require": "off",
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "max-len": ["error", 120, {"ignorePattern": "[^\\n\\r]{115,120}\\{(?:'|\") (?:'|\")\\}"}],
+    "no-alert": "off",
+    "no-confusing-arrow": "off",
+    "no-console": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "prefer-template": "warn",
+    "react/forbid-prop-types": "warn",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-no-target-blank": "warn",
+    "react/no-multi-comp": ["error", {"ignoreStateless": true}],
+    "react/no-unescaped-entities": "off",
+    "react/prefer-stateless-function": "warn",
+    "import/default": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "error",
+    "import/no-unresolved": "off"
+  },
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "settings": {
+    "import/resolve": {
+      "moduleDirectory": [
+        "node_modules",
+        "src",
+        "api"
+      ]
+    }
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "__DEVTOOLS__": true,
+    "__DLLS__": true,
+    "socket": true,
+    "webpackIsomorphicTools": true
+  }
+}
