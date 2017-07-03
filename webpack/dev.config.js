@@ -122,6 +122,10 @@ var webpackConfig = module.exports = {
     ],
     extensions: ['.json', '.js', '.jsx']
   },
+  node: {
+    child_process: 'empty',
+    fs: 'empty'
+  },
   plugins: [
     new webpack.LoaderOptionsPlugin({
       test: /\.(less|scss)/,

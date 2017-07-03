@@ -38,10 +38,10 @@ export default class Provider extends Component {
   static propTypes = {
     app: PropTypes.shape({
       service: PropTypes.func
-    }).isRequired,
+    }), // .isRequired,
     restApp: PropTypes.shape({
       service: PropTypes.func
-    }).isRequired,
+    }), // .isRequired,
     store: PropTypes.shape({
       subscribe: PropTypes.func.isRequired,
       dispatch: PropTypes.func.isRequired,
@@ -53,8 +53,8 @@ export default class Provider extends Component {
   static childContextTypes = {
     app: PropTypes.PropTypes.shape({
       service: PropTypes.func
-    }).isRequired,
-    restApp: PropTypes.object.isRequired,
+    }), // .isRequired,
+    restApp: PropTypes.object, // .isRequired,
     store: PropTypes.shape({
       subscribe: PropTypes.func.isRequired,
       dispatch: PropTypes.func.isRequired,
@@ -67,6 +67,16 @@ export default class Provider extends Component {
       isSubscribed: PropTypes.func.isRequired
     })
   };
+
+  // We have to define defaultProps since we can't require app/restApp
+  // since when DevTools is inside a provider it doesn't pass the
+  // app/restApp prop.
+  static defaultProps = {
+    app: {
+      service: () => {}
+    },
+    restApp: {}
+  }
 
   constructor(props, context) {
     super(props, context);
