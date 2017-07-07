@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import { routerActions } from 'react-router-redux';
-import { UserAuthWrapper } from 'redux-auth-wrapper';
+// import { routerActions } from 'react-router-redux';
+// import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { App, Home, NotFound } from 'containers';
 import getRoutesUtils from 'utils/routes';
 
@@ -9,24 +9,24 @@ import getRoutesUtils from 'utils/routes';
 if (typeof System.import === 'undefined') System.import = module => Promise.resolve(require(module));
 
 export default store => {
-  const { injectReducerAndRender, permissionsComponent } = getRoutesUtils(store);
+  const { injectReducerAndRender/* , permissionsComponent */ } = getRoutesUtils(store);
 
   /* Permissions */
 
-  const isAuthenticated = UserAuthWrapper({
-    authSelector: state => state.auth.user,
-    redirectAction: routerActions.replace,
-    wrapperDisplayName: 'UserIsAuthenticated'
-  });
+  // const isAuthenticated = UserAuthWrapper({
+  //   authSelector: state => state.auth.user,
+  //   redirectAction: routerActions.replace,
+  //   wrapperDisplayName: 'UserIsAuthenticated'
+  // });
 
-  const isNotAuthenticated = UserAuthWrapper({
-    authSelector: state => state.auth.user,
-    redirectAction: routerActions.replace,
-    wrapperDisplayName: 'UserIsNotAuthenticated',
-    predicate: user => !user,
-    failureRedirectPath: '/',
-    allowRedirectBack: false
-  });
+  // const isNotAuthenticated = UserAuthWrapper({
+  //   authSelector: state => state.auth.user,
+  //   redirectAction: routerActions.replace,
+  //   wrapperDisplayName: 'UserIsNotAuthenticated',
+  //   predicate: user => !user,
+  //   failureRedirectPath: '/',
+  //   allowRedirectBack: false
+  // });
 
   /**
    * Please keep routes in alphabetical order
@@ -41,7 +41,7 @@ export default store => {
         You can also protect a route like this:
         <Route path="protected-route" {...permissionsComponent(isAuthenticated)(Component)}>
       */}
-      <Route {...permissionsComponent(isAuthenticated)()}>
+      {/* <Route {...permissionsComponent(isAuthenticated)()}>
         <Route path="loginSuccess" getComponent={() => System.import('./containers/LoginSuccess/LoginSuccess')} />
         <Route
           path="chatFeathers"
@@ -51,15 +51,15 @@ export default store => {
               System.import('./containers/ChatFeathers/ChatFeathers')
             )}
         />
-      </Route>
+      </Route> */}
 
       {/* Routes disallow login */}
-      <Route {...permissionsComponent(isNotAuthenticated)()}>
+      {/* <Route {...permissionsComponent(isNotAuthenticated)()}>
         <Route path="register" getComponent={() => System.import('./containers/Register/Register')} />
-      </Route>
+      </Route> */}
 
       {/* Routes */}
-      <Route path="login" getComponent={() => System.import('./containers/Login/Login')} />
+      {/* <Route path="login" getComponent={() => System.import('./containers/Login/Login')} />
       <Route path="about" getComponent={() => System.import('./containers/About/About')} />
       <Route
         path="survey"
@@ -68,7 +68,7 @@ export default store => {
             { survey: System.import('./redux/modules/survey') },
             System.import('./containers/Survey/Survey')
           )}
-      />
+      /> */}
       <Route
         path="widgets"
         getComponent={() =>
@@ -77,7 +77,7 @@ export default store => {
             System.import('./containers/Widgets/Widgets')
           )}
       />
-      <Route path="chat" getComponent={() => System.import('./containers/Chat/Chat')} />
+      <Route path="metacoin" getComponent={() => System.import('./containers/MetaCoin/MetaCoin')} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />

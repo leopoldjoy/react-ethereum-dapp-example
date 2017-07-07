@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { socket } from 'app';
 
 @connect(state => ({ user: state.auth.user }))
-export default class Chat extends Component {
+export default class MetaCoin extends Component {
   static propTypes = {
     user: PropTypes.shape({
       email: PropTypes.string
@@ -52,16 +52,16 @@ export default class Chat extends Component {
   };
 
   render() {
-    const style = require('./Chat.scss');
+    const style = require('./MetaCoin.scss');
 
     return (
-      <div className={`${style.chat} container`}>
-        <h1>Chat</h1>
+      <div className={`${style.metacoin} container`}>
+        <h1>MetaCoin</h1>
 
         <div>
           <ul>
             {this.state.messages.map(msg =>
-              (<li key={`chat.msg.${msg.id}`}>
+              (<li key={`metacoin.msg.${msg.id}`}>
                 {msg.from}: {msg.text}
               </li>)
             )}

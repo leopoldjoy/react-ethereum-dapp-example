@@ -1,9 +1,15 @@
 const SET_COINBASE = 'redux-example/blockchain/SET_COINBASE';
 const SET_BALANCE = 'redux-example/blockchain/SET_BALANCE';
+const SET_LATEST_BLOCK_NUMBER = 'redux-example/blockchain/SET_LATEST_BLOCK_NUMBER';
+const SET_LATEST_BLOCK_TIMESTAMP = 'redux-example/blockchain/SET_LATEST_BLOCK_TIMESTAMP';
+const SET_LATEST_BLOCK_HASH = 'redux-example/blockchain/SET_LATEST_BLOCK_HASH';
 
 const initialState = {
   coinbase: '',
-  balance: ''
+  balance: '',
+  latestBlockNumber: 0,
+  latestBlockTimestamp: 0,
+  latestBlockHash: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -17,6 +23,21 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         balance: action.balance
+      };
+    case SET_LATEST_BLOCK_NUMBER:
+      return {
+        ...state,
+        latestBlockNumber: action.latestBlockNumber
+      };
+    case SET_LATEST_BLOCK_TIMESTAMP:
+      return {
+        ...state,
+        latestBlockTimestamp: action.latestBlockTimestamp
+      };
+    case SET_LATEST_BLOCK_HASH:
+      return {
+        ...state,
+        latestBlockHash: action.latestBlockHash
       };
     default:
       return state;
@@ -34,5 +55,26 @@ export function setBalance(balance) {
   return {
     type: SET_BALANCE,
     balance
+  };
+}
+
+export function setLatestBlockNumber(latestBlockNumber) {
+  return {
+    type: SET_LATEST_BLOCK_NUMBER,
+    latestBlockNumber
+  };
+}
+
+export function setLatestBlockTimestamp(latestBlockTimestamp) {
+  return {
+    type: SET_LATEST_BLOCK_TIMESTAMP,
+    latestBlockTimestamp
+  };
+}
+
+export function setLatestBlockHash(latestBlockHash) {
+  return {
+    type: SET_LATEST_BLOCK_HASH,
+    latestBlockHash
   };
 }

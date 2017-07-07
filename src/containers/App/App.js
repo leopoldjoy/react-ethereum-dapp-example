@@ -10,7 +10,7 @@ import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { Notifs, InfoBar } from 'components';
+import { Notifs /* , InfoBar */ } from 'components';
 import { push } from 'react-router-redux';
 import config from 'config';
 import { asyncConnect } from 'redux-connect';
@@ -99,18 +99,18 @@ export default class App extends Component {
 
           <Navbar.Collapse>
             <Nav navbar>
-              {user &&
+              {/* user &&
                 <LinkContainer to="/chatFeathers">
                   <NavItem>Chat with Feathers</NavItem>
-                </LinkContainer>}
+                </LinkContainer> */}
 
-              <LinkContainer to="/chat">
-                <NavItem>Chat</NavItem>
+              <LinkContainer to="/metacoin">
+                <NavItem>MetaCoin</NavItem>
               </LinkContainer>
               <LinkContainer to="/widgets">
                 <NavItem>Widgets</NavItem>
               </LinkContainer>
-              <LinkContainer to="/survey">
+              {/* <LinkContainer to="/survey">
                 <NavItem>Survey</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
@@ -130,7 +130,7 @@ export default class App extends Component {
                   <NavItem className="logout-link" onClick={this.handleLogout}>
                     Logout
                   </NavItem>
-                </LinkContainer>}
+                </LinkContainer> */}
             </Nav>
             {user &&
               <p className="navbar-text">
@@ -163,22 +163,17 @@ export default class App extends Component {
 
           {children}
         </div>
-        <InfoBar />
+        {/* <InfoBar /> */}
 
         <div className="well text-center">
           Have questions? Ask for help{' '}
           <a
-            href="https://github.com/erikras/react-redux-universal-hot-example/issues"
+            href="https://github.com/leopoldjoy/react-ethereum-example-dapp/issues"
             target="_blank"
             rel="noopener noreferrer"
           >
             on Github
-          </a>{' '}
-          or in the{' '}
-          <a href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank" rel="noopener noreferrer">
-            #react-redux-universal
-          </a>{' '}
-          Discord channel.
+          </a>.
         </div>
       </div>
     );
