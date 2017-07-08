@@ -13,3 +13,4 @@ api/**/*.nedb
 *.report.html
 .DS_Store
 tmp-*
+build/contracts/*.json
