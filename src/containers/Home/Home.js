@@ -6,10 +6,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import * as blockchainActions from 'redux/modules/blockchain';
-import Web3 from 'web3';
-
-// Setup web3 connection
-const web3 = new Web3('ws://127.0.0.1:8546');
+import web3 from '../../web3';
 
 @connect(state => (
   {
@@ -47,12 +44,12 @@ export default class Home extends Component {
     // Get and then set coinbase address
     web3.eth.getCoinbase().then(coinbase => {
       this.props.setCoinbase(coinbase);
-    });
-    // Set default address
-    web3.eth.defaultAccount = '0x00a329c0648769a73afac7f9381e08fb43dbea72';
-    // Get and then set default account balance
-    web3.eth.getBalance(web3.eth.defaultAccount).then(balance => {
-      this.props.setBalance(balance);
+      // Set default address
+      web3.eth.defaultAccount = coinbase;
+      // Get and then set default account balance
+      return web3.eth.getBalance(coinbase, () => {}).then(balance => {
+        this.props.setBalance(balance);
+      });
     });
     // Get latest block number
     web3.eth.getBlockNumber().then(latestBlockNumber => {
@@ -65,24 +62,9 @@ export default class Home extends Component {
       });
     });
 
-    web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 0).then(result => {
-      console.log(web3.utils.hexToAscii(result));
-    });
-    web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 1).then(result => {
-      console.log(web3.utils.hexToAscii(result));
-    });
-    web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 2).then(result => {
-      console.log(web3.utils.hexToAscii(result));
-    });
-    web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 3).then(result => {
-      console.log(web3.utils.hexToAscii(result));
-    });
-    web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 4).then(result => {
-      console.log(web3.utils.hexToAscii(result));
-    });
-    web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 5).then(result => {
-      console.log(web3.utils.hexToAscii(result));
-    });
+    // web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 0).then(result => {
+    //   console.log(web3.utils.hexToAscii(result));
+    // });
 
     // });
   }

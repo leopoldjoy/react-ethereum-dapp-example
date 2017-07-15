@@ -5,7 +5,7 @@ import { reducer as reduxAsyncConnect } from 'redux-connect';
 import auth from './modules/auth';
 import notifs from './modules/notifs';
 // import counter from './modules/counter';
-import info from './modules/info';
+// import info from './modules/info';
 import blockchain from './modules/blockchain';
 // import widgets from './modules/widgets';
 // import survey from './modules/survey';
@@ -25,7 +25,7 @@ export default function createReducers(asyncReducers) {
     //   counter2: counter,
     //   counter3: counter
     // }),
-    info,
+    // info,
     // widgets,
     // survey,
     // chat,

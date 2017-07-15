@@ -9,7 +9,7 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { isLoaded as isAuthLoaded, load as loadAuth /* , logout */ } from 'redux/modules/auth';
 import { Notifs /* , InfoBar */ } from 'components';
 import { push } from 'react-router-redux';
 import config from 'config';
@@ -35,7 +35,7 @@ import { asyncConnect } from 'redux-connect';
     notifs: state.notifs,
     user: state.auth.user
   }),
-  { logout, pushState: push }
+  { /* logout, */ pushState: push }
 )
 export default class App extends Component {
   static propTypes = {
@@ -49,7 +49,7 @@ export default class App extends Component {
     notifs: PropTypes.shape({
       global: PropTypes.array
     }).isRequired,
-    logout: PropTypes.func.isRequired,
+    // logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
 
@@ -72,10 +72,10 @@ export default class App extends Component {
     }
   }
 
-  handleLogout = event => {
-    event.preventDefault();
-    this.props.logout();
-  };
+  // handleLogout = event => {
+  //   event.preventDefault();
+  //   this.props.logout();
+  // };
 
   render() {
     const { user, notifs, children } = this.props;
