@@ -2,13 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { socket } from 'app';
+import * as blockchainActions from 'redux/modules/blockchain';
+import web3 from '../../web3';
 
-@connect(state => ({ user: state.auth.user }))
+@connect(state => (
+  {
+    user: state.auth.user,
+    coinbase: state.blockchain.coinbase
+  }),
+{
+  ...blockchainActions
+}
+)
 export default class MetaCoin extends Component {
   static propTypes = {
     user: PropTypes.shape({
       email: PropTypes.string
-    })
+    }),
+    coinbase: PropTypes.string.isRequired,
+    setCoinbase: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -21,6 +33,15 @@ export default class MetaCoin extends Component {
   };
 
   componentDidMount() {
+    // Get and set coinbase if it hasn't been set yet
+    if (this.props.coinbase.length === 0) {
+      web3.eth.getCoinbase().then(coinbase => {
+        this.props.setCoinbase(coinbase);
+        // Set default address
+        web3.eth.defaultAccount = coinbase;
+      });
+    }
+
     socket.on('msg', this.onMessageReceived);
     setTimeout(() => {
       socket.emit('history', { offset: 0, length: 100 });
@@ -52,11 +73,14 @@ export default class MetaCoin extends Component {
   };
 
   render() {
+    const { coinbase } = this.props;
     const style = require('./MetaCoin.scss');
 
     return (
       <div className={`${style.metacoin} container`}>
         <h1>MetaCoin</h1>
+
+        <h2>Your Address: {coinbase}</h2>
 
         <div>
           <ul>
