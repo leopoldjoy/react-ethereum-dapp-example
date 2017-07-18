@@ -10,6 +10,7 @@ import blockchain from './modules/blockchain';
 // import widgets from './modules/widgets';
 // import survey from './modules/survey';
 // import chat from './modules/chat';
+import metaCoin from './modules/metaCoin';
 
 export default function createReducers(asyncReducers) {
   return {
@@ -20,6 +21,7 @@ export default function createReducers(asyncReducers) {
     notifs,
     auth,
     blockchain,
+    metaCoin,
     // counter: multireducer({
     //   counter1: counter,
     //   counter2: counter,

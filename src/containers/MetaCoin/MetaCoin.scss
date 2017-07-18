@@ -10,4 +10,24 @@
       margin-left: 10px;
     }
   }
+  ul {
+    list-style-type: none;
+    li {
+      div {
+        display: inline-block;
+        word-wrap: break-word;
+        vertical-align: top;
+        text-align: center;
+      }
+      .txnAddress {
+        width: 40%;
+        font-size: 12px;
+      }
+      .txnAmount {
+        width: 20%;
+        font-size: 16px;
+        line-height: 16px;
+      }
+    }
+  }
 }
