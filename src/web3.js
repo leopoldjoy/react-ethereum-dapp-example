@@ -1,12 +1,10 @@
 import Web3 from '../node_modules/web3'; // Must specfiy node_modules to avoid importing itself
 
 let web3;
-console.log('recalling web3.js...');
 // Instantiate new web3 global instance
 if (typeof window !== 'undefined' && // Check we're on the client-side
            (typeof window.web3 === 'undefined' ||
            typeof window.web3.currentProvider === 'undefined')) {
-  console.log('create');
   window.web3 = new Web3('ws://127.0.0.1:8546');
 }
 
@@ -14,7 +12,6 @@ if (typeof window !== 'undefined' && // Check we're on the client-side
 if (typeof window !== 'undefined' && // Check we're on the client-side
     typeof window.web3 !== 'undefined' &&
     typeof window.web3.currentProvider !== 'undefined') {
-  console.log('reuse');
   web3 = new Web3(window.web3.currentProvider);
 }
 

@@ -37,10 +37,6 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    // const subscription =
-    // web3.eth.subscribe('newBlockHeaders')
-    // .on('data', blockHeader => {
-
     // Get and then set coinbase address
     web3.eth.getCoinbase().then(coinbase => {
       this.props.setCoinbase(coinbase);
@@ -61,12 +57,6 @@ export default class Home extends Component {
         this.props.setLatestBlockHash(latestBlock.hash);
       });
     });
-
-    // web3.eth.getStorageAt('0x53f6337d308ffb2c52eda319be216cc7321d3725', 0).then(result => {
-    //   console.log(web3.utils.hexToAscii(result));
-    // });
-
-    // });
   }
 
   render() {

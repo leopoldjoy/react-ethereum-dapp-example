@@ -78,7 +78,7 @@ export default class App extends Component {
   // };
 
   render() {
-    const { user, notifs, children } = this.props;
+    const { notifs, children } = this.props;
     const styles = require('./App.scss');
 
     return (
@@ -99,48 +99,15 @@ export default class App extends Component {
 
           <Navbar.Collapse>
             <Nav navbar>
-              {/* user &&
-                <LinkContainer to="/chatFeathers">
-                  <NavItem>Chat with Feathers</NavItem>
-                </LinkContainer> */}
-
               <LinkContainer to="/metacoin">
                 <NavItem>MetaCoin</NavItem>
               </LinkContainer>
-              <LinkContainer to="/widgets">
-                <NavItem>Widgets</NavItem>
-              </LinkContainer>
-              {/* <LinkContainer to="/survey">
-                <NavItem>Survey</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/about">
-                <NavItem>About Us</NavItem>
-              </LinkContainer>
-
-              {!user &&
-                <LinkContainer to="/login">
-                  <NavItem>Login</NavItem>
-                </LinkContainer>}
-              {!user &&
-                <LinkContainer to="/register">
-                  <NavItem>Register</NavItem>
-                </LinkContainer>}
-              {user &&
-                <LinkContainer to="/logout">
-                  <NavItem className="logout-link" onClick={this.handleLogout}>
-                    Logout
-                  </NavItem>
-                </LinkContainer> */}
             </Nav>
-            {user &&
-              <p className="navbar-text">
-                Logged in as <strong>{user.email}</strong>.
-              </p>}
             <Nav navbar pullRight>
               <NavItem
                 target="_blank"
                 title="View on Github"
-                href="https://github.com/erikras/react-redux-universal-hot-example"
+                href="https://github.com/leopoldjoy/react-ethereum-dapp-example"
               >
                 <i className="fa fa-github" />
               </NavItem>
