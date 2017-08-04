@@ -2,12 +2,14 @@ const SET_AMOUNT_TO_SEND = 'redux-example/metaCoin/SET_AMOUNT_TO_SEND';
 const SET_ADDRESS_TO_SEND = 'redux-example/metaCoin/SET_ADDRESS_TO_SEND';
 const SET_META_BALANCE = 'redux-example/metaCoin/SET_META_BALANCE';
 const SET_PAST_TRANSACTIONS = 'redux-example/metaCoin/SET_PAST_TRANSACTIONS';
+const SET_USER_BALANCES = 'redux-example/metaCoin/SET_USER_BALANCES';
 
 const initialState = {
   amountToSend: '',
   addressToSend: '',
   metaBalance: '',
-  pastTransactions: []
+  pastTransactions: [],
+  userBalances: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -31,6 +33,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         pastTransactions: action.pastTransactions
+      };
+    case SET_USER_BALANCES:
+      return {
+        ...state,
+        userBalances: action.userBalances
       };
     default:
       return state;
@@ -62,5 +69,12 @@ export function setPastTransactions(pastTransactions) {
   return {
     type: SET_PAST_TRANSACTIONS,
     pastTransactions
+  };
+}
+
+export function setUserBalances(userBalances) {
+  return {
+    type: SET_USER_BALANCES,
+    userBalances
   };
 }

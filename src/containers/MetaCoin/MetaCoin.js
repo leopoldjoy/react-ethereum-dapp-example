@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import async from 'async';
 import * as blockchainActions from '../../redux/modules/blockchain';
 import * as metaCoinActions from '../../redux/modules/metaCoin';
 import web3 from '../../web3';
@@ -14,7 +15,8 @@ let MetaCoinContract;
     amountToSend: state.metaCoin.amountToSend,
     addressToSend: state.metaCoin.addressToSend,
     metaBalance: state.metaCoin.metaBalance,
-    pastTransactions: state.metaCoin.pastTransactions
+    pastTransactions: state.metaCoin.pastTransactions,
+    userBalances: state.metaCoin.userBalances
   }),
 {
   ...blockchainActions,
@@ -36,7 +38,9 @@ export default class MetaCoin extends Component {
     metaBalance: PropTypes.string.isRequired,
     setMetaBalance: PropTypes.func.isRequired,
     pastTransactions: PropTypes.arrayOf(PropTypes.object).isRequired,
-    setPastTransactions: PropTypes.func.isRequired
+    setPastTransactions: PropTypes.func.isRequired,
+    userBalances: PropTypes.objectOf(PropTypes.string).isRequired,
+    setUserBalances: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -72,7 +76,7 @@ export default class MetaCoin extends Component {
     });
 
     // Also load past transactions array
-    this.loadPastTransactions();
+    this.loadPastTransactionsAndAddresses();
   }
 
   initWeb3Subscriptions = () => {
@@ -98,17 +102,53 @@ export default class MetaCoin extends Component {
     });
   }
 
-  loadPastTransactions = () => {
-    const { setPastTransactions } = this.props;
-    MetaCoinContract.getPastEvents('Transfer', {
-      fromBlock: 0,
-      toBlock: 'latest'
-    }, (err, results) => {
-      if (!err) {
+  loadPastTransactionsAndAddresses = () => {
+    const { setPastTransactions, setUserBalances } = this.props;
+    return async.waterfall([
+      callback => {
+        // First we obtain all of the past transactions events
+        MetaCoinContract.getPastEvents('Transfer', {
+          fromBlock: 0,
+          toBlock: 'latest'
+        }, (err, results) => callback(err || (results.length === 0), results));
+      },
+      (results, callback) => {
+        // Save past transactions to redux
         setPastTransactions(results);
+        // We also want to create an object of balances and their corresponding
+        // balances.
+        // First we iterate over all transactions and collect the unique addresses
+        const userBalances = {};
+        for (let inc = 0; inc < results.length; inc += 1) {
+          const txn = results[inc];
+          userBalances[txn.returnValues._from] = 0;
+          userBalances[txn.returnValues._to] = 0;
+          if (inc === results.length - 1) {
+            return callback(null, userBalances);
+          }
+        }
+      },
+      (userBalances, callback) => {
+        const addresses = Object.keys(userBalances);
+        // Now we iterate over each address and obtain each one's balance
+        return async.eachSeries(addresses, (address, addrCallback) => ( // Async loop
+          setTimeout(() => (/* Trick to prevent strange bluebird.js warning:
+                               "a promise was created in a handler but was
+                               not returned from it" */
+            MetaCoinContract.methods.getBalance(address).call().then(bal => {
+              userBalances[address] = bal;
+              return addrCallback();
+            }, err => addrCallback(err))
+          ), 1)
+        ), err => callback(err, userBalances));
       }
+    ], (err, userBalances) => {
+      if (err) {
+        throw err;
+      }
+      setUserBalances(userBalances); // Now we update the redux userBalances
     });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -130,7 +170,8 @@ export default class MetaCoin extends Component {
       setAmountToSend,
       addressToSend,
       setAddressToSend,
-      pastTransactions
+      pastTransactions,
+      userBalances
     } = this.props;
     const style = require('./MetaCoin.scss');
 
@@ -140,7 +181,7 @@ export default class MetaCoin extends Component {
 
         <h4>Your Address: {coinbase}</h4>
         <h4>Your Balance: {metaBalance}</h4>
-        {(pastTransactions.length > 0) && <h4>Past Transactions:</h4>}
+        {(pastTransactions.length > 0) && <h4>All Past Transactions:</h4>}
 
         <div>
           <ul>
@@ -152,6 +193,13 @@ export default class MetaCoin extends Component {
                   ======>
                 </div>
                 <div className={`${style.txnAddress}`}>{txn.returnValues._to}</div>
+              </li>)
+            )}
+          </ul>
+          <ul>
+            {Object.keys(userBalances).map(address =>
+              (<li key={`metacoin.bals.${address}`}>
+                <div>{address}: {userBalances[address]}</div>
               </li>)
             )}
           </ul>
