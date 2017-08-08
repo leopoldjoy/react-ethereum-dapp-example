@@ -7,12 +7,16 @@
   form {
     margin: 30px 0;
     :global(.btn) {
-      margin-left: 10px;
+      &:hover {
+        color: rgb(80, 80, 80);
+      }
     }
   }
   ul {
     list-style-type: none;
     li {
+      margin-top: 10px;
+      margin-bottom: 10px;
       div {
         display: inline-block;
         word-wrap: break-word;
@@ -20,13 +24,24 @@
         text-align: center;
       }
       .txnAddress {
-        width: 40%;
+        display: inline-block;
         font-size: 12px;
       }
-      .txnAmount {
-        width: 20%;
+      .txnAmountWrap {
+        display: inline-block;
         font-size: 16px;
         line-height: 16px;
+        width: 100px;
+        margin-top: -4px;
+        .txnValue {
+          color: #9E9797;
+          font-weight: 200;
+          font-size: 12px;
+          display: block;
+          span {
+            font-size: 8px;
+          }
+        }
       }
     }
   }

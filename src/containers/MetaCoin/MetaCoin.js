@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import async from 'async';
+import { AddressBlock } from 'components';
+import FontAwesome from 'react-fontawesome';
 import * as blockchainActions from '../../redux/modules/blockchain';
 import * as metaCoinActions from '../../redux/modules/metaCoin';
 import web3 from '../../web3';
@@ -89,7 +91,7 @@ export default class MetaCoin extends Component {
         '0x670d0f1021c1c8fc068202386bb74772749f765c',
         {
           from: coinbase,
-          gasPrice: '20000000000', // default gas price in wei, 20 gwei in this case
+          // gasPrice: '20000000000', // default gas price in wei, 20 gwei in this case
         }
       );
 
@@ -121,8 +123,8 @@ export default class MetaCoin extends Component {
         const userBalances = {};
         for (let inc = 0; inc < results.length; inc += 1) {
           const txn = results[inc];
-          userBalances[txn.returnValues._from] = 0;
-          userBalances[txn.returnValues._to] = 0;
+          userBalances[txn.returnValues._from.toLowerCase()] = 0;
+          userBalances[txn.returnValues._to.toLowerCase()] = 0;
           if (inc === results.length - 1) {
             return callback(null, userBalances);
           }
@@ -177,52 +179,86 @@ export default class MetaCoin extends Component {
 
     return (
       <div className={`${style.metacoin} container`}>
-        <h1>MetaCoin</h1>
-
-        <h4>Your Address: {coinbase}</h4>
-        <h4>Your Balance: {metaBalance}</h4>
-        {(pastTransactions.length > 0) && <h4>All Past Transactions:</h4>}
+        <h1>MetaCoin (MTC)</h1>
 
         <div>
+          <h4>You:</h4>
+          <ul><li>
+            <AddressBlock
+              address={coinbase.toLowerCase()}
+              balance={metaBalance}
+              currency={'MTC'}
+            />
+          </li></ul>
+          {(pastTransactions.length > 0) && <h4>Transactions:</h4>}
           <ul>
             {pastTransactions.map(txn =>
               (<li key={`metacoin.txn.${txn.id}`}>
-                <div className={`${style.txnAddress}`}>{txn.returnValues._from}</div>
-                <div className={`${style.txnAmount}`}>
-                  {txn.returnValues._value} MetaCoin<br />
-                  ======>
+                <div className={`${style.txnAddress}`}>
+                  <AddressBlock
+                    address={txn.returnValues._from.toLowerCase()}
+                    noBalance
+                  />
                 </div>
-                <div className={`${style.txnAddress}`}>{txn.returnValues._to}</div>
+                <div className={`${style.txnAmountWrap}`}>
+                  <FontAwesome
+                    name="arrow-circle-right"
+                    size="2x"
+                  />
+                  <div className={style.txnValue}>
+                    {txn.returnValues._value} <span>MTC</span>
+                  </div>
+                </div>
+                <div className={`${style.txnAddress}`}>
+                  <AddressBlock
+                    address={txn.returnValues._to.toLowerCase()}
+                    noBalance
+                  />
+                </div>
               </li>)
             )}
           </ul>
+          <h4>Accounts:</h4>
           <ul>
             {Object.keys(userBalances).map(address =>
               (<li key={`metacoin.bals.${address}`}>
-                <div>{address}: {userBalances[address]}</div>
+                <AddressBlock
+                  address={address.toLowerCase()}
+                  balance={userBalances[address]}
+                  currency={'MTC'}
+                />
               </li>)
             )}
           </ul>
+          <h4>Send:</h4>
           <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              placeholder="Amount to send..."
-              value={amountToSend}
-              onChange={event => {
-                setAmountToSend(event.target.value);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Address to send to..."
-              value={addressToSend}
-              onChange={event => {
-                setAddressToSend(event.target.value);
-              }}
-            />
-            <button className="btn" onClick={this.handleSubmit}>
-              Send
-            </button>
+            <ul>
+              <li>
+                <input
+                  type="text"
+                  placeholder="0x000..."
+                  value={addressToSend}
+                  onChange={event => {
+                    setAddressToSend(event.target.value);
+                  }}
+                />
+              </li>
+              <li>
+                <input
+                  type="text"
+                  placeholder="0.00"
+                  value={amountToSend}
+                  onChange={event => {
+                    setAmountToSend(event.target.value);
+                  }}
+                />
+              </li>
+              <li>
+                <button className="btn" onClick={this.handleSubmit}>
+                  Send
+                </button>
+              </li>
+            </ul>
           </form>
         </div>
       </div>
