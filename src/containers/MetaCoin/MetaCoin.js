@@ -7,6 +7,7 @@ import FontAwesome from 'react-fontawesome';
 import * as blockchainActions from '../../redux/modules/blockchain';
 import * as metaCoinActions from '../../redux/modules/metaCoin';
 import web3 from '../../web3';
+import contractAddress from '../../../contractAddresses';
 
 let MetaCoinContract;
 
@@ -88,7 +89,7 @@ export default class MetaCoin extends Component {
       // Create an instance of the contract
       MetaCoinContract = new web3.eth.Contract(
         result.abi,
-        '0x670d0f1021c1c8fc068202386bb74772749f765c',
+        contractAddress.MetaCoin,
         {
           from: coinbase,
           // gasPrice: '20000000000', // default gas price in wei, 20 gwei in this case
