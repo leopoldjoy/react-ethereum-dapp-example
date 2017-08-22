@@ -7,18 +7,18 @@
 
 ---
 
-![Includes an example Ethereum token implmentation and UI](/images/metacoin.png?raw=true "MetaCoin Example")
+![Includes an example Ethereum token implmentation and UI](/images/metacoin.png?raw=true "Includes an example Ethereum token implmentation and UI")
 
 ## About
 
 This is a starter boilerplate Ethereum dapp I've put together using the following technologies:
 
-* [React Redux Universal Hot Example](https://github.com/bertho-zero/react-redux-universal-hot-example) (implements [React](https://github.com/facebook/react), [React Router](https://github.com/reactjs/react-router), [Babel](http://babeljs.io), [Webpack](https://webpack.js.org/), [Redux](https://github.com/reactjs/redux), [Redux Dev Tools](https://github.com/reactjs/redux-devtools) for next generation DX (developer experience), [React Router Redux](https://github.com/reactjs/react-router-redux) Redux/React Router bindings, [ESLint](http://eslint.org), and more)
+* [React Redux Universal Hot Example](https://github.com/bertho-zero/react-redux-universal-hot-example) (implements [React](https://github.com/facebook/react), [React Router](https://github.com/reactjs/react-router), [Babel](http://babeljs.io), [Webpack](https://webpack.js.org/), [Redux](https://github.com/reactjs/redux), [Redux Dev Tools](https://github.com/reactjs/redux-devtools), [React Router Redux](https://github.com/reactjs/react-router-redux), [ESLint](http://eslint.org), and more)
 * [Truffle](https://github.com/trufflesuite/truffle)
-* [Ethereum Javascript API (web3.js) 1.0-beta](https://github.com/ethereum/web3.js)
+* [Ethereum Javascript API (Web3.js) 1.0-beta](https://github.com/ethereum/web3.js/tree/1.0)
 * [Parity](https://github.com/paritytech/parity)
 
-I put this together as a starter repository for building react/redux dapps using the latest bleeding-edge Ethereum development technologies. Please note that the repository is still under development; I will be adding additional smart-contract/UI examples.
+I put this together as a starter repository for building react/redux dapps using the latest bleeding-edge Ethereum development technologies. Please note that the repository is still under development; I will be adding additional smart-contracts/UI examples.
 
 ## Features
 
@@ -91,6 +91,8 @@ Run all of the following commands in the project directory.
 parity --chain dev --ui-interface 127.0.0.1 --jsonrpc-interface 127.0.0.1 --ws-interface 127.0.0.1 --ws-origins "*"
 ```
 
+Note: we set `--ws-interface` and `--ws-origins` so that we can use websockets to subscribe to blockchain events.
+
 ### Compile and Migrate smart-contracts
 
 ```bash
@@ -100,6 +102,10 @@ truffle migrate
 
 NOTE: after running `truffle migrate` open parity (at `http://127.0.0.1:8180/`) in a browser and confirm all of the transactions to complete the migration.
 
+### Update Contract Deployment Addresses
+
+Copy each smart-contract deployment address from the `truffle migrate` command output and update each corresponding address in `/contractAddresses.js` accordingly.
+
 ### Start Dev Javascript Server
 
 ```bash
@@ -108,7 +114,7 @@ npm run dev
 
 The first time it may take a little while to generate the first `webpack-assets.json` and complain with a few dozen `[webpack-isomorphic-tools] (waiting for the first Webpack build to finish)` printouts, but be patient. Give it 30 seconds.
 
-Now you can access dapp at: `http://localhost:3000`.
+Now you can access the dapp at: `http://localhost:3000`.
 
 #### Using Redux DevTools
 
@@ -141,6 +147,10 @@ The Web3.js Javascript library that is used in the React/Redux portion of the da
 
 For more info on Parity and how it works please read the [wiki](https://github.com/paritytech/parity/wiki).
 
+#### contractAddresses.js
+
+The `/contractAddresses.js` file simply contains the current deployment addresses of the dapp's smart-contracts.
+
 #### loadContractABI API
 
 The `loadContractABI` API is used to get the Application Binary Interface (ABI) for the smart-contracts from their JSON files. It runs on the server-side of the app as it's easier to access the file-system that way.
@@ -152,7 +162,7 @@ Planned future additions:
 - [ ] make MetaCoin into a ERC20 standards-compliant token
 - [ ] add example oracle smart-contract example that interacts with external data
 - [ ] consider implementing [`truffle-contract`](https://github.com/trufflesuite/truffle-contract) for better Ethereum contract abstraction
-- [ ] implement/document truffle unit tests
+- [ ] implement/document truffle unit tests with Travis CI
 - [ ] add production environment deployment instructions
 
 ## Contributing
