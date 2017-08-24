@@ -26,7 +26,7 @@ I put this together as a starter repository for building react/redux dapps using
   <dt>Highly flexible and adaptable</dt>
   <dd>Quickly make changes and customize by starting with a minimalist Ethereum dapp implementation.</dd>
 
-  <dt>Bleeding-edge technologies including Web3.js 1.0</dt>
+  <dt>Bleeding-edge technologies including Web3.js v1.0</dt>
   <dd>The repository aims to implement the most contemporary technologies and design patterns. For this reason we support the latest version of Web3.js, which is still in beta, so your dapp code will remain current going forward.</dd>
 
   <dt>Truffle support</dt>
@@ -83,7 +83,7 @@ npm install
 
 ## Running Dev Environment
 
-Run all of the following commands in the project directory.
+Run all of the following commands inside the project directory.
 
 ### Start Parity Development Chain
 
@@ -104,7 +104,7 @@ NOTE: after running `truffle migrate` open parity (at `http://127.0.0.1:8180/`) 
 
 ### Update Contract Deployment Addresses
 
-Copy each smart-contract deployment address from the `truffle migrate` command output and update each corresponding address in `/contractAddresses.js` accordingly.
+Copy each smart-contract deployment address from the `truffle migrate` command output and update each corresponding address in [`/contractAddresses.js`](https://github.com/leopoldjoy/react-ethereum-dapp-example/blob/master/contractAddresses.js) accordingly.
 
 ### Start Dev Javascript Server
 
@@ -114,7 +114,7 @@ npm run dev
 
 The first time it may take a little while to generate the first `webpack-assets.json` and complain with a few dozen `[webpack-isomorphic-tools] (waiting for the first Webpack build to finish)` printouts, but be patient. Give it 30 seconds.
 
-Now you can access the dapp at: `http://localhost:3000`.
+You're good to go! :) Now you can access the dapp at: `http://localhost:3000`.
 
 #### Using Redux DevTools
 
@@ -137,7 +137,7 @@ Please see the [`react-redux-universal-hot-example documentation`](https://githu
 
 Smart-contracts are written inside the `/contracts` directory. The `truffle compile` command then creates corresponding `.json` files inside the `/build/contracts` directory.
 
-For a smart-contracts to be deployed when `truffle migrate` is run it must be called with `.deploy()` in `/migrations/2_deploy_contracts.js`. Note: you can add additional deployment files to the `/migrations` directory, simply increment the number at the beginning of the `.js` file.
+For a smart-contracts to be deployed when `truffle migrate` is run it must be called with `.deploy()` in `/migrations/2_deploy_contracts.js` or any other migration file in the `./migrations` directory (note: you can add additional deployment files to this directory, simply increment the number at the beginning of the filename, e.g.: `3_anotha_one.js`).
 
 For more info on Truffle and how it works please read the [documentation](http://truffleframework.com/docs/).
 
