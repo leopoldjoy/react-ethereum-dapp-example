@@ -1,17 +1,15 @@
 pragma solidity ^0.4.4;
 
-contract Me {
+contract StorageExample {
   string first;
   string last;
   string twitter;
-  string nick;
   address myAddress;
   uint dateJoined;
-  function Me(){
-    first = 'Ken';
-    last = 'Kappler';
-    twitter = '@kapplerken';
-    nick ='BlueChain';
+  function StorageExample(){
+    first = 'Leopold';
+    last = 'Joy';
+    twitter = '@leopoldjoy';
     myAddress = msg.sender;
     dateJoined = block.timestamp;
   }   
