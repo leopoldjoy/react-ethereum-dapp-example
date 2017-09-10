@@ -9,25 +9,27 @@
 
 ![Includes an example Ethereum token implmentation and UI](/images/metacoin.png?raw=true "Includes an example Ethereum token implmentation and UI")
 
+_Includes an example Ethereum token implmentation and UI._
+
 ## About
 
 This is a starter boilerplate Ethereum dapp I've put together using the following technologies:
 
-* [React Redux Universal Hot Example](https://github.com/bertho-zero/react-redux-universal-hot-example) (implements [React](https://github.com/facebook/react), [React Router](https://github.com/reactjs/react-router), [Babel](http://babeljs.io), [Webpack](https://webpack.js.org/), [Redux](https://github.com/reactjs/redux), [Redux Dev Tools](https://github.com/reactjs/redux-devtools), [React Router Redux](https://github.com/reactjs/react-router-redux), [ESLint](http://eslint.org), and more)
-* [Truffle](https://github.com/trufflesuite/truffle)
 * [Ethereum Javascript API (Web3.js) 1.0-beta](https://github.com/ethereum/web3.js/tree/1.0)
+* [Truffle](https://github.com/trufflesuite/truffle)
 * [Parity](https://github.com/paritytech/parity)
+* [React Redux Universal Hot Example](https://github.com/bertho-zero/react-redux-universal-hot-example) (implements [React](https://github.com/facebook/react), [React Router](https://github.com/reactjs/react-router), [Babel](http://babeljs.io), [Webpack](https://webpack.js.org/), [Redux](https://github.com/reactjs/redux), [Redux Dev Tools](https://github.com/reactjs/redux-devtools), [React Router Redux](https://github.com/reactjs/react-router-redux), [ESLint](http://eslint.org), and more)
 
 I put this together as a starter repository for building react/redux dapps using the latest bleeding-edge Ethereum development technologies. Please note that the repository is still under development; I will be adding additional smart-contracts/UI examples.
 
 ## Features
 
 <dl>
-  <dt>Highly flexible and adaptable</dt>
-  <dd>Quickly make changes and customize by starting with a minimalist Ethereum dapp implementation.</dd>
-
   <dt>Bleeding-edge technologies including Web3.js v1.0</dt>
   <dd>The repository aims to implement the most contemporary technologies and design patterns. For this reason we support the latest version of Web3.js, which is still in beta, so your dapp code will remain current going forward.</dd>
+
+  <dt>Highly flexible and adaptable</dt>
+  <dd>Quickly make changes and customize by starting with a minimalist Ethereum dapp implementation.</dd>
 
   <dt>Truffle support</dt>
   <dd>Built-in smart contract compilation, linking, deployment and binary management from the CLI.</dd>
