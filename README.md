@@ -7,7 +7,7 @@
 
 ---
 
-![Includes an example Ethereum token implmentation and UI](/images/metacoin.png?raw=true "Includes an example Ethereum token implmentation and UI")
+![Includes an example Ethereum token implmentation and UI](/images/metacoin.gif?raw=true "Includes an example Ethereum token implmentation and UI")
 
 _Includes an example Ethereum token implmentation and UI._
 
