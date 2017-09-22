@@ -113,11 +113,15 @@ export default class MetaCoin extends Component {
         MetaCoinContract.getPastEvents('Transfer', {
           fromBlock: 0,
           toBlock: 'latest'
-        }, (err, results) => callback(err || (results.length === 0), results));
+        }, (err, results) => callback(err, results));
       },
       (results, callback) => {
         // Save past transactions to redux
         setPastTransactions(results);
+        // Check if the results were empty (in which case the loop won't run)
+        if (results.length === 0) {
+          return callback(null, {});
+        }
         // We also want to create an object of balances and their corresponding
         // balances.
         // First we iterate over all transactions and collect the unique addresses
@@ -133,6 +137,10 @@ export default class MetaCoin extends Component {
       },
       (userBalances, callback) => {
         const addresses = Object.keys(userBalances);
+        // Check if addresses is empty (in which case the loop won't run)
+        if (addresses.length === 0) {
+          return callback(null, {});
+        }
         // Now we iterate over each address and obtain each one's balance
         return async.eachSeries(addresses, (address, addrCallback) => ( // Async loop
           setTimeout(() => (/* Trick to prevent strange bluebird.js warning:
