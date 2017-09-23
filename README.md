@@ -5,11 +5,9 @@
 [![Dependency Status](https://david-dm.org/leopoldjoy/react-ethereum-dapp-example.svg?style=flat-square)](https://david-dm.org/leopoldjoy/react-ethereum-dapp-example)
 [![devDependency Status](https://david-dm.org/leopoldjoy/react-ethereum-dapp-example/dev-status.svg?style=flat-square)](https://david-dm.org/leopoldjoy/react-ethereum-dapp-example?type=dev)
 
----
+![Includes an example Ethereum token implementation and UI](/images/metacoin.gif?raw=true "Includes an example Ethereum token implementation and UI")
 
-![Includes an example Ethereum token implmentation and UI](/images/metacoin.gif?raw=true "Includes an example Ethereum token implmentation and UI")
-
-_Includes an example Ethereum token implmentation and UI._
+Includes an example Ethereum token implementation and UI!
 
 ## About
 
@@ -20,7 +18,7 @@ This is a starter boilerplate Ethereum dapp I've put together using the followin
 * [Parity](https://github.com/paritytech/parity)
 * [React Redux Universal Hot Example](https://github.com/bertho-zero/react-redux-universal-hot-example) (implements [React](https://github.com/facebook/react), [React Router](https://github.com/reactjs/react-router), [Babel](http://babeljs.io), [Webpack](https://webpack.js.org/), [Redux](https://github.com/reactjs/redux), [Redux Dev Tools](https://github.com/reactjs/redux-devtools), [React Router Redux](https://github.com/reactjs/react-router-redux), [ESLint](http://eslint.org), and more)
 
-I put this together as a starter repository for building react/redux dapps using the latest bleeding-edge Ethereum development technologies. Please note that the repository is still under development; I will be adding additional smart-contracts/UI examples.
+This starter repository for building react/redux dapps uses the latest bleeding-edge Ethereum development technologies. Please note that the repository is still under development; I will be adding additional smart-contracts/UI examples.
 
 ## Features
 
@@ -87,7 +85,7 @@ npm install
 
 Run all of the following commands inside the project directory.
 
-### Start Parity Development Chain
+### 1) Start Parity Development Chain
 
 ```bash
 parity --chain dev --ui-interface 127.0.0.1 --jsonrpc-interface 127.0.0.1 --ws-interface 127.0.0.1 --ws-origins "*"
@@ -95,20 +93,19 @@ parity --chain dev --ui-interface 127.0.0.1 --jsonrpc-interface 127.0.0.1 --ws-i
 
 Note: we set `--ws-interface` and `--ws-origins` so that we can use websockets to subscribe to blockchain events.
 
-### Compile and Migrate smart-contracts
+### 2) Compile and Migrate smart-contracts
 
 ```bash
-truffle compile
-truffle migrate
+truffle compile && truffle migrate
 ```
 
-NOTE: after running `truffle migrate` open parity (at `http://127.0.0.1:8180/`) in a browser and confirm all of the transactions to complete the migration.
+NOTE: after running open parity (at [`http://127.0.0.1:8180/`](http://127.0.0.1:8180/)) in a browser and confirm all of the transactions to complete the migration.
 
-### Update Contract Deployment Addresses
+### 3) Update Contract Deployment Addresses
 
-Copy each smart-contract deployment address from the `truffle migrate` command output and update each corresponding address in [`/contractAddresses.js`](https://github.com/leopoldjoy/react-ethereum-dapp-example/blob/master/contractAddresses.js) accordingly.
+Copy each smart-contract deployment address from the `truffle migrate` command output and update each corresponding address in [`/contractAddresses.js`](https://github.com/leopoldjoy/react-ethereum-dapp-example/blob/master/contractAddresses.js).
 
-### Start Dev Javascript Server
+### 4) Start Dev Javascript Server
 
 ```bash
 npm run dev

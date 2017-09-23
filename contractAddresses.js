@@ -4,5 +4,5 @@
  */
 
 export default {
-  MetaCoin: '0xedbd3ff82764f5affe31af3bd1ffa86425b79613'
+  MetaCoin: '0x3b27b8b51c7ab8dc92329b434f724e9f8e9ce251'
 };
