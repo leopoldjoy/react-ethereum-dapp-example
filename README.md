@@ -88,10 +88,10 @@ Run all of the following commands inside the project directory.
 ### 1) Start Parity Development Chain
 
 ```bash
-parity --chain dev --ui-interface 127.0.0.1 --jsonrpc-interface 127.0.0.1 --ws-interface 127.0.0.1 --ws-origins "*"
+parity --chain dev --ws-origins "*"
 ```
 
-Note: we set `--ws-interface` and `--ws-origins` so that we can use websockets to subscribe to blockchain events.
+Note: we set `--ws-origins` so that we can use websockets to subscribe to blockchain events.
 
 ### 2) Compile and Migrate smart-contracts
 
