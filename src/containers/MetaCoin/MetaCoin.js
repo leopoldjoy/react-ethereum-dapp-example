@@ -7,7 +7,7 @@ import FontAwesome from 'react-fontawesome';
 import * as blockchainActions from '../../redux/modules/blockchain';
 import * as metaCoinActions from '../../redux/modules/metaCoin';
 import web3 from '../../web3';
-import contractAddress from '../../../contractAddresses';
+import contractAddress from '../../../build/contracts/addresses.json';
 
 let MetaCoinContract;
 
@@ -96,7 +96,11 @@ export default class MetaCoin extends Component {
         }
       );
 
-      web3.eth.subscribe('newBlockHeaders', (/* err, results */) => {
+      web3.eth.subscribe('newBlockHeaders', err => {
+        if (err) {
+          console.error('There was an error subscribing to the block headers:');
+          console.error(err);
+        }
         this.updateWeb3Info();
       });
 

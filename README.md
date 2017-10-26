@@ -101,11 +101,7 @@ truffle compile && truffle migrate
 
 NOTE: after running open parity (at [`http://127.0.0.1:8180/`](http://127.0.0.1:8180/)) in a browser and confirm all of the transactions to complete the migration.
 
-### 3) Update Contract Deployment Addresses
-
-Copy each smart-contract deployment address from the `truffle migrate` command output and update each corresponding address in [`/contractAddresses.js`](https://github.com/leopoldjoy/react-ethereum-dapp-example/blob/master/contractAddresses.js).
-
-### 4) Start Dev Javascript Server
+### 3) Start Dev Javascript Server
 
 ```bash
 npm run dev
@@ -113,7 +109,7 @@ npm run dev
 
 The first time it may take a little while to generate the first `webpack-assets.json` and complain with a few dozen `[webpack-isomorphic-tools] (waiting for the first Webpack build to finish)` printouts, but be patient. Give it 30 seconds.
 
-You're good to go! :) Now you can access the dapp at: `http://localhost:3000`.
+You're good to go! :) Now you can access the dapp at: [`http://localhost:3000`](http://localhost:3000).
 
 #### Using Redux DevTools
 
@@ -146,9 +142,9 @@ The Web3.js Javascript library that is used in the React/Redux portion of the da
 
 For more info on Parity and how it works please read the [wiki](https://github.com/paritytech/parity/wiki).
 
-#### contractAddresses.js
+#### /build/contracts/addresses.json
 
-The `/contractAddresses.js` file simply contains the current deployment addresses of the dapp's smart-contracts.
+After running `truffle migrate`, the [`2_deploy_contracts.js`](/migrations/2_deploy_contracts.js) migration script will create an `addresses.json` file inside of the newly created `/build/contracts` directory that will simply contain a JSON object of the current deployment addresses of the dapp's smart-contracts.
 
 #### loadContractABI API
 
