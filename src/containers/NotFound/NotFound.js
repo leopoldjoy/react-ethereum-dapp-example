@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './NotFound.css';
 
-export default function NotFound() {
-  return (
-    <div className="container">
-      <h1>Doh! 404!</h1>
-      <p>
-        These are <em>not</em> the droids you are looking for!
-      </p>
-    </div>
-  );
+class NotFound extends Component {
+  static propTypes = {
+    children: PropTypes.node
+  };
+  render() {
+    const { children } = this.props;
+
+    return (
+      <div className="NotFound">
+        <header className="NotFound-header">
+          <h1 className="NotFound-title">PAGE NOT FOUND</h1>
+        </header>
+        <p className="NotFound-content">
+          {children}
+        </p>
+      </div>
+    );
+  }
 }
+
+export default NotFound;

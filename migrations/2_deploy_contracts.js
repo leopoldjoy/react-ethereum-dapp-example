@@ -18,7 +18,7 @@ module.exports = function(deployer) {
 
 // This function saves the provided contract address to the "build/contract/addresses.json" JSON file
 function updateAddressJSON(name, address) {
-  var filePath = './build/contracts/addresses.json';
+  var filePath = './src/contracts/addresses.json';
   var options = { defaultValue: () => ({}) }; // Default is an empty object
 
   updateJsonFile(filePath, function (data) {

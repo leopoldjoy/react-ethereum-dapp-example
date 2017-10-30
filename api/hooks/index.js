@@ -1,1 +1,0 @@
-export validateHook from './validateHook';

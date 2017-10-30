@@ -2,50 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import async from 'async';
-import { AddressBlock } from 'components';
+import { AddressBlock } from '../../components';
 import FontAwesome from 'react-fontawesome';
-import * as blockchainActions from '../../redux/modules/blockchain';
-import * as metaCoinActions from '../../redux/modules/metaCoin';
-import web3 from '../../web3';
-import contractAddress from '../../../build/contracts/addresses.json';
+import * as blockchainActions from '../../actions/blockchain';
+import * as metaCoinActions from '../../actions/metaCoin';
+import getWeb3 from '../../utils/getWeb3';
+import contractAddress from '../../contracts/addresses.json';
+
+const web3 = getWeb3();
 
 let MetaCoinContract;
-
-@connect(state => (
-  {
-    // user: state.auth.user,
-    coinbase: state.blockchain.coinbase,
-    amountToSend: state.metaCoin.amountToSend,
-    addressToSend: state.metaCoin.addressToSend,
-    metaBalance: state.metaCoin.metaBalance,
-    pastTransactions: state.metaCoin.pastTransactions,
-    userBalances: state.metaCoin.userBalances
-  }),
-{
-  ...blockchainActions,
-  ...metaCoinActions
-}
-)
-export default class MetaCoin extends Component {
-  static propTypes = {
-    // user: PropTypes.shape({
-    //   email: PropTypes.string
-    // }),
-    coinbase: PropTypes.string.isRequired,
-    setCoinbase: PropTypes.func.isRequired,
-    loadContractABI: PropTypes.func.isRequired,
-    setAmountToSend: PropTypes.func.isRequired,
-    setAddressToSend: PropTypes.func.isRequired,
-    amountToSend: PropTypes.string.isRequired,
-    addressToSend: PropTypes.string.isRequired,
-    metaBalance: PropTypes.string.isRequired,
-    setMetaBalance: PropTypes.func.isRequired,
-    pastTransactions: PropTypes.arrayOf(PropTypes.object).isRequired,
-    setPastTransactions: PropTypes.func.isRequired,
-    userBalances: PropTypes.objectOf(PropTypes.string).isRequired,
-    setUserBalances: PropTypes.func.isRequired
-  };
-
+export class MetaCoin extends Component {
   componentDidMount() {
     // Get and set coinbase if it hasn't been set yet
     if (this.props.coinbase.length === 0) {
@@ -278,3 +245,37 @@ export default class MetaCoin extends Component {
     );
   }
 }
+
+MetaCoin.propTypes = {
+  coinbase: PropTypes.string.isRequired,
+  setCoinbase: PropTypes.func.isRequired,
+  loadContractABI: PropTypes.func.isRequired,
+  setAmountToSend: PropTypes.func.isRequired,
+  setAddressToSend: PropTypes.func.isRequired,
+  amountToSend: PropTypes.string.isRequired,
+  addressToSend: PropTypes.string.isRequired,
+  metaBalance: PropTypes.string.isRequired,
+  setMetaBalance: PropTypes.func.isRequired,
+  pastTransactions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setPastTransactions: PropTypes.func.isRequired,
+  userBalances: PropTypes.objectOf(PropTypes.string).isRequired,
+  setUserBalances: PropTypes.func.isRequired
+};
+
+export default connect(
+  state => ({
+    coinbase: state.blockchain.coinbase,
+    amountToSend: state.metaCoin.amountToSend,
+    addressToSend: state.metaCoin.addressToSend,
+    metaBalance: state.metaCoin.metaBalance,
+    pastTransactions: state.metaCoin.pastTransactions,
+    userBalances: state.metaCoin.userBalances
+  }),
+  {
+    ...blockchainActions,
+    ...metaCoinActions
+  }
+  // dispatch => ({
+  //   setSelectedCountry: bindActionCreators(countriesAndVillagesActions.setSelectedCountry, dispatch)
+  // })
+)(MetaCoin);

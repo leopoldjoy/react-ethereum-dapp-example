@@ -1,4 +1,5 @@
 module.exports = {
+  // contracts_build_directory: './src/build', // Must be inside "/src" or else create-react-app complains
   networks: {
     development: {
       host: "localhost",

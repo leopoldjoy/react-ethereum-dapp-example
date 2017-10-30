@@ -1,0 +1,18 @@
+.NotFound {
+  text-align: center;
+}
+
+.NotFound-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.NotFound-title {
+  font-size: 1.5em;
+}
+
+.NotFound-content {
+  font-size: large;
+}
