@@ -1,0 +1,19 @@
+.Home-wrap {
+  margin-bottom: 15px;
+}
+
+.Home-wrap ul {
+  list-style: none;
+  text-align: left;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.Home-wrap ul li {
+  padding-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

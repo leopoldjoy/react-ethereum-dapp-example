@@ -8,6 +8,7 @@ import * as blockchainActions from '../../actions/blockchain';
 import * as metaCoinActions from '../../actions/metaCoin';
 import getWeb3 from '../../utils/getWeb3';
 import contractAddress from '../../contracts/addresses.json';
+import './MetaCoin.css';
 
 const web3 = getWeb3();
 
@@ -155,10 +156,9 @@ export class MetaCoin extends Component {
       pastTransactions,
       userBalances
     } = this.props;
-    const style = require('./MetaCoin.scss');
 
     return (
-      <div className={`${style.metacoin} container`}>
+      <div className='MetaCoin-wrap'>
         <h1>MetaCoin (MTC)</h1>
 
         <div>
@@ -174,22 +174,22 @@ export class MetaCoin extends Component {
           <ul>
             {pastTransactions.map(txn =>
               (<li key={`metacoin.txn.${txn.id}`}>
-                <div className={`${style.txnAddress}`}>
+                <div className='MetaCoin-txnAddress'>
                   <AddressBlock
                     address={txn.returnValues._from.toLowerCase()}
                     noBalance
                   />
                 </div>
-                <div className={`${style.txnAmountWrap}`}>
+                <div className='MetaCoin-txnAmountWrap'>
                   <FontAwesome
                     name="arrow-circle-right"
                     size="2x"
                   />
-                  <div className={style.txnValue}>
+                  <div className='MetaCoin-txnValue'>
                     {txn.returnValues._value} <span>MTC</span>
                   </div>
                 </div>
-                <div className={`${style.txnAddress}`}>
+                <div className='MetaCoin-txnAddress'>
                   <AddressBlock
                     address={txn.returnValues._to.toLowerCase()}
                     noBalance
@@ -234,7 +234,7 @@ export class MetaCoin extends Component {
                 />
               </li>
               <li>
-                <button className="btn" onClick={this.handleSubmit}>
+                <button onClick={this.handleSubmit}>
                   Send
                 </button>
               </li>

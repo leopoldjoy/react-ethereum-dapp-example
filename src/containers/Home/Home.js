@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as blockchainActions from '../../actions/blockchain';
 import getWeb3 from '../../utils/getWeb3';
+import './Home.css';
 
 const web3 = getWeb3();
 
@@ -31,12 +32,11 @@ export class Home extends Component {
   }
 
   render() {
-    const styles = require('./Home.scss');
-
     const { coinbase, balance, latestBlockNumber, latestBlockTimestamp, latestBlockHash } = this.props;
+
     return (
-      <div className={styles.home}>
-        <div className="container">
+      <div className="Home-wrap">
+        <div>
           <h1>Information:</h1>
 
           <ul>

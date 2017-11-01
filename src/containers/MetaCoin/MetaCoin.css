@@ -1,0 +1,52 @@
+.MetaCoin-wrap input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.MetaCoin-wrap form {
+  margin: 30px 0;
+}
+
+.MetaCoin-wrap form button:hover {
+  color: rgb(80, 80, 80);
+}
+
+.MetaCoin-wrap ul {
+  list-style-type: none;
+}
+
+.MetaCoin-wrap ul li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.MetaCoin-wrap ul li div {
+  display: inline-block;
+  word-wrap: break-word;
+  vertical-align: top;
+  text-align: center;
+}
+
+.MetaCoin-wrap ul li div.MetaCoin-txnAddress {
+  display: inline-block;
+  font-size: 12px;
+}
+.MetaCoin-wrap ul li div.MetaCoin-txnAmountWrap {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 16px;
+  width: 100px;
+  margin-top: -4px;
+}
+
+.MetaCoin-wrap ul li div.MetaCoin-txnAmountWrap div.MetaCoin-txnValue {
+  color: rgb(51,51,51);
+  font-weight: 600;
+  font-size: 12px;
+  display: block;
+}
+
+.MetaCoin-wrap ul li div.MetaCoin-txnAmountWrap div.MetaCoin-txnValue span {
+  font-size: 10px;
+}
