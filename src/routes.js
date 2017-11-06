@@ -3,13 +3,14 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router';
 import { App, Home, MetaCoin, NotFound } from './containers';
-import { store, history } from './reducers';
+import { store, history } from './store';
 
 export default () => (
   <Provider store={store}>
-    { /* ConnectedRouter will use the store from Provider automatically */ }
-    <ConnectedRouter history={history}>
-      <App>
+    {/* Outer App wrapper */}
+    <App>
+      {/* ConnectedRouter will use the store from Provider automatically */}
+      <ConnectedRouter history={history}>
         <Switch>
           {/* Home (main) route */}
           <Route exact path="/" component={Home} />
@@ -20,7 +21,7 @@ export default () => (
           {/* Catch all route */}
           <Route component={NotFound} status={404} />
         </Switch>
-      </App>
-    </ConnectedRouter>
+      </ConnectedRouter>
+    </App>
   </Provider>
 );
