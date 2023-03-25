@@ -42,7 +42,7 @@ This starter repository for building react/redux dapps uses the latest bleeding-
   <dd>Use JSX syntax with all ES6 features, and some of ES7 (see <a href=".babelrc">.babelrc</a>).</dd>
 
   <dt>CSS in modules</dt>
-  <dd>Write composable, modular and maintenable CSS with your components.</dd>
+  <dd>Write composable, modular and maintainable CSS with your components.</dd>
 
   <dt>Predictable state management</dt>
   <dd>Unidirectional data flow with <a href="http://redux.js.org">Redux</a> helps you write applications that behave consistently and are easy to test. On top of that, it provides a great developer experience.</dd>
